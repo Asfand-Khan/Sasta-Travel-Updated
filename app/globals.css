@@ -1,7 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
+html,
+body,
+:root{
+  height: 100%;
+}
+
+.parallax-container {
+  /*  this is where the magic happens:  */
+  background-color: #2f9096;
+  background-image: url("https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80");
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-blend-mode: soft-light;
+  min-height: 50vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
