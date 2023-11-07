@@ -14,7 +14,7 @@ import { Calendar as CalendarIcon } from "lucide-react";
 import { useCallback, useMemo } from 'react';
 
 const formSchema = z.object({
-    form: z.string().min(1, 'Please select From location.'),
+    from: z.string().min(1, 'Please select From location.'),
     to: z.string().min(1, 'Please select To location.'),
     depart: z.date({
         required_error: "Please select a date and time",
@@ -32,13 +32,10 @@ const formSchema = z.object({
 })
 
 const FlightForm = () => {
-
-    
-
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            form: '',
+            from: '',
             to: '',
             depart: new Date(),
             return: new Date(),
@@ -82,7 +79,7 @@ const FlightForm = () => {
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-1 flex-row items-center justify-evenly">
                     <FormField
                         control={form.control}
-                        name="form"
+                        name="from"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>From</FormLabel>
@@ -93,9 +90,9 @@ const FlightForm = () => {
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        <SelectItem value="Karachi">Karachi</SelectItem>
-                                        <SelectItem value="Islamabad">Islamabad</SelectItem>
-                                        <SelectItem value="Lahore">Lahore</SelectItem>
+                                        <SelectItem value="m@example.com">m@example.com</SelectItem>
+                                        <SelectItem value="m@google.com">m@google.com</SelectItem>
+                                        <SelectItem value="m@support.com">m@support.com</SelectItem>
                                     </SelectContent>
                                 </Select>
                                 <FormMessage />
@@ -112,7 +109,7 @@ const FlightForm = () => {
                                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                                     <FormControl>
                                         <SelectTrigger>
-                                            <SelectValue placeholder="To Everywhere" />
+                                            <SelectValue placeholder="To Anywhere" />
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
@@ -128,39 +125,39 @@ const FlightForm = () => {
 
                     {toggleOnwayReturn ? (
                         <FormField
-                        control={form.control}
-                        name="depart"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Depart</FormLabel>
-                                <Popover>
-                                    <FormControl>
-                                        <PopoverTrigger asChild>
-                                            <Button
-                                                variant={"outline"}
-                                                className={cn(
-                                                    "w-[280px] justify-start text-left font-normal",
-                                                    !field.value && "text-muted-foreground"
-                                                )}
-                                            >
-                                                <CalendarIcon className="mr-2 h-4 w-4" />
-                                                {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
-                                            </Button>
-                                        </PopoverTrigger>
-                                    </FormControl>
-                                    <PopoverContent className="w-auto p-0">
-                                        <Calendar
-                                            mode="single"
-                                            selected={field.value}
-                                            onSelect={field.onChange}
-                                            initialFocus
-                                        />
-                                    </PopoverContent>
-                                </Popover>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                            control={form.control}
+                            name="depart"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Depart</FormLabel>
+                                    <Popover>
+                                        <FormControl>
+                                            <PopoverTrigger asChild>
+                                                <Button
+                                                    variant={"outline"}
+                                                    className={cn(
+                                                        "w-[280px] justify-start text-left font-normal",
+                                                        !field.value && "text-muted-foreground"
+                                                    )}
+                                                >
+                                                    <CalendarIcon className="mr-2 h-4 w-4" />
+                                                    {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
+                                                </Button>
+                                            </PopoverTrigger>
+                                        </FormControl>
+                                        <PopoverContent className="w-auto p-0">
+                                            <Calendar
+                                                mode="single"
+                                                selected={field.value}
+                                                onSelect={field.onChange}
+                                                initialFocus
+                                            />
+                                        </PopoverContent>
+                                    </Popover>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
                     ) : (<>return field</>)}
 
 
